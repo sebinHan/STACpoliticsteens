@@ -1,0 +1,12 @@
+package droidmentor.PoliticTeens_Client;
+
+/**
+ * Created by Eun bee on 2016-11-21.
+ */
+
+public class S {
+    public static String phorourl;
+    public static String author;
+    public static String news_link;
+
+}
