@@ -38,6 +38,12 @@
             </intent-filter>
         </activity>
         <uses-permission android:name="android.permission.INTERNET"/>
+
+        <activity android:name="BaseActivity2"/>
+        <activity android:name="NewPostActivity"/>
+        <activity android:name="PostDetailActivity"/>
+
     </application>
+
 
 </manifest>

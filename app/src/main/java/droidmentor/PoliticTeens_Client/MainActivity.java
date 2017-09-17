@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -50,6 +52,13 @@ public class MainActivity extends BaseActivity2 {
         setSupportActionBar(parent);
         parent.setPadding(0, 0, 0, 0);//for tab otherwise give space in tab
         parent.setContentInsetsAbsolute(0, 0);
+
+        findViewById(R.id.fab_new_post).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, NewPostActivity.class));
+            }
+        });
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
