@@ -60,7 +60,7 @@
         android:clipToPadding="false"
         android:padding="5dp"
         android:scrollbars="vertical"
-        tools:listitem="@layout/item_post"
+        tools:listitem="@layout/plaza_item_post"
         android:layout_below="@+id/plaza_bar2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
