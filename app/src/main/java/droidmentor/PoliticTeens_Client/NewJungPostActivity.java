@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,12 +18,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import droidmentor.PoliticTeens_Client.models.JungPost;
 import droidmentor.PoliticTeens_Client.models.Post;
 import droidmentor.PoliticTeens_Client.models.UserLogin;
 
-public class NewPostActivity extends BaseActivity2 {
+public class NewJungPostActivity extends BaseActivity2 {
 
-    private static final String TAG = "NewPostActivity";
+    private static final String TAG = "NewJungPostActivity";
     private static final String REQUIRED = "입력해주세요";
 
     // [START declare_database_ref]
@@ -32,11 +34,12 @@ public class NewPostActivity extends BaseActivity2 {
     private EditText mTitleField;
     private EditText mBodyField;
     private FloatingActionButton mSubmitButton;
+    private Spinner mCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_post);
+        setContentView(R.layout.activity_myjungdang_new_post);
 
         // [START initialize_database_ref]
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -44,6 +47,9 @@ public class NewPostActivity extends BaseActivity2 {
 
         mTitleField = (EditText) findViewById(R.id.field_title);
         mBodyField = (EditText) findViewById(R.id.field_body);
+        mCategory = (Spinner)findViewById(R.id.field_category);
+
+
         mSubmitButton = (FloatingActionButton) findViewById(R.id.fab_submit_post);
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +63,7 @@ public class NewPostActivity extends BaseActivity2 {
     private void submitPost() {
         final String title = mTitleField.getText().toString();
         final String body = mBodyField.getText().toString();
-
+        final String categoryText = mCategory.getSelectedItem().toString();
         // Title is required
         if (TextUtils.isEmpty(title)) {
             mTitleField.setError(REQUIRED);
@@ -87,12 +93,12 @@ public class NewPostActivity extends BaseActivity2 {
                         if (user == null) {
                             // User is null, error out
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
-                            Toast.makeText(NewPostActivity.this,
+                            Toast.makeText(NewJungPostActivity.this,
                                     "Error: could not fetch user.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
-                            writeNewPost(userId, user.username, title, body);
+                            writeNewPost(userId, user.username, title, body, categoryText);
                         }
 
                         // Finish this Activity, back to the stream
@@ -123,16 +129,16 @@ public class NewPostActivity extends BaseActivity2 {
     }
 
     // [START write_fan_out]
-    private void writeNewPost(String userId, String username, String title, String body) {
+    private void writeNewPost(String userId, String username, String title, String body, String category) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
-        String key = mDatabase.child("plaza_posts").push().getKey();
-        Post post = new Post(userId, username, title, body);
+        String key = mDatabase.child("jung_posts").push().getKey();
+        JungPost post = new JungPost(userId, username, title, body, category);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/plaza_posts/" + key, postValues);
-        childUpdates.put("/plaza_user-posts/" + userId + "/" + key, postValues);
+        childUpdates.put("/jung_posts/" + key, postValues);
+        childUpdates.put("/jung_user-posts/" + userId + "/" + key, postValues);
 
         mDatabase.updateChildren(childUpdates);
     }

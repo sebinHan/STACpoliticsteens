@@ -11,30 +11,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import droidmentor.PoliticTeens_Client.R;
-import droidmentor.PoliticTeens_Client.models.Post;
+import droidmentor.PoliticTeens_Client.models.JungPost;
 
-public class PostViewHolder extends RecyclerView.ViewHolder {
+public class JungPostViewHolder extends RecyclerView.ViewHolder {
 
     public TextView titleView;
     public TextView authorView;
     public ImageView starView;
     public TextView numStarsView;
+    public TextView category;
     public TextView bodyView;
 
-    public PostViewHolder(View itemView) {
+    public JungPostViewHolder(View itemView) {
         super(itemView);
 
         titleView = (TextView) itemView.findViewById(R.id.post_title);
         authorView = (TextView) itemView.findViewById(R.id.post_author);
         starView = (ImageView) itemView.findViewById(R.id.star);
         numStarsView = (TextView) itemView.findViewById(R.id.post_num_stars);
+        category = (TextView) itemView.findViewById(R.id.category);
         //bodyView = (TextView) itemView.findViewById(R.id.post_body);
     }
 
-    public void bindToPost(Post post, View.OnClickListener starClickListener) {
+    public void bindToPost(JungPost post, View.OnClickListener starClickListener) {
         titleView.setText(post.title);
         authorView.setText(post.author);
         numStarsView.setText(String.valueOf(post.starCount));
+        category.setText(post.category);
         //bodyView.setText(post.body);
 
         starView.setOnClickListener(starClickListener);

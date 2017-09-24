@@ -60,6 +60,13 @@ public class MainActivity extends BaseActivity2 {
             }
         });
 
+        findViewById(R.id.fab_jungdang_post).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, NewJungPostActivity.class));
+            }
+        });
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         //Initializing the bottomNavigationView

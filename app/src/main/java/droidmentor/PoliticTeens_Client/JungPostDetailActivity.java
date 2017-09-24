@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ import droidmentor.PoliticTeens_Client.models.Comment;
 import droidmentor.PoliticTeens_Client.models.Post;
 import droidmentor.PoliticTeens_Client.models.UserLogin;
 
-public class PostDetailActivity extends BaseActivity2 implements View.OnClickListener {
+public class JungPostDetailActivity extends BaseActivity2 implements View.OnClickListener {
 
     private static final String TAG = "PostDetailActivity";
 
@@ -45,7 +46,6 @@ public class PostDetailActivity extends BaseActivity2 implements View.OnClickLis
     private EditText mCommentField;
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +59,9 @@ public class PostDetailActivity extends BaseActivity2 implements View.OnClickLis
 
         // Initialize Database
         mPostReference = FirebaseDatabase.getInstance().getReference()
-                .child("plaza_posts").child(mPostKey);
+                .child("jung_posts").child(mPostKey);
         mCommentsReference = FirebaseDatabase.getInstance().getReference()
-                .child("plaza_post-comments").child(mPostKey);
+                .child("jung_post-comments").child(mPostKey);
 
         // Initialize Views
         mAuthorView = (TextView) findViewById(R.id.post_author);
@@ -99,7 +99,7 @@ public class PostDetailActivity extends BaseActivity2 implements View.OnClickLis
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // [START_EXCLUDE]
-                Toast.makeText(PostDetailActivity.this, "Failed to load post.",
+                Toast.makeText(JungPostDetailActivity.this, "Failed to load post.",
                         Toast.LENGTH_SHORT).show();
                 // [END_EXCLUDE]
             }

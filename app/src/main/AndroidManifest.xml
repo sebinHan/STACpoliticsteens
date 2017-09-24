@@ -43,6 +43,9 @@
         <activity android:name="NewPostActivity"/>
         <activity android:name="PostDetailActivity"/>
 
+        <activity android:name=".NewJungPostActivity"/>
+        <activity android:name="JungPostDetailActivity"/>
+
     </application>
 
 

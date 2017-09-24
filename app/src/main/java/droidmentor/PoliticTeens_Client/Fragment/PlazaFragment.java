@@ -45,6 +45,7 @@ public class PlazaFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        Log.d("3","tq");
         View rootView = inflater.inflate(R.layout.fragment_plaza, container, false);
 
         // [START create_database_reference]
@@ -100,8 +101,8 @@ public class PlazaFragment extends Fragment {
                     @Override
                     public void onClick(View starView) {
                         // Need to write to both places the post is stored
-                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
-                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+                        DatabaseReference globalPostRef = mDatabase.child("plaza_posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("plaza_user-posts").child(model.uid).child(postRef.getKey());
 
                         // Run two transactions
                         onStarClicked(globalPostRef);
@@ -165,7 +166,7 @@ public class PlazaFragment extends Fragment {
         // [START recent_posts_query]
         // Last 100 posts, these are automatically the 100 most recent
         // due to sorting by push() keys
-        Query recentPostsQuery = databaseReference.child("posts/")
+        Query recentPostsQuery = databaseReference.child("plaza_posts/")
                 .limitToFirst(100);
         // [END recent_posts_query]
 

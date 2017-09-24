@@ -10,23 +10,58 @@
         android:id="@+id/item"
         android:background="@color/colorTextPrimary">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="["
+            android:textSize="20dp"
+            android:layout_alignBaseline="@+id/category"
+            android:layout_alignBottom="@+id/category"
+            android:layout_alignLeft="@+id/item_bar"
+            android:layout_alignStart="@+id/item_bar"
+            android:id="@+id/textView4" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/category"
+            android:text="자유"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_alignBottom="@+id/item_bar"
+            android:layout_toRightOf="@+id/textView4"
+            android:layout_toEndOf="@+id/textView4" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="]"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:id="@+id/textView3"
+            android:layout_alignBottom="@+id/item_bar"
+            android:layout_toRightOf="@+id/category"
+            android:layout_toEndOf="@+id/category" />
         <include
             layout="@layout/include_post_author"
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
-            />
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/textView3"
+            android:layout_toEndOf="@+id/textView3" />
 
         <include
             layout="@layout/include_post_text_title"
             android:id="@+id/content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
-            android:layout_marginStart="35dp"
             android:gravity="center_vertical"
+            android:layout_marginLeft="23dp"
+            android:layout_marginStart="23dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/name"
             android:layout_toEndOf="@+id/name" />
