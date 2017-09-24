@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -38,9 +39,12 @@ import droidmentor.PoliticTeens_Client.viewholder.JungPostViewHolder;
  */
 public class MyJungdangFragment extends Fragment {
 
+    Button makingJundang;
     FragmentManager manager;  //Fragment를 관리하는 클래스의 참조변수
     FragmentTransaction tran;  //실제로 Fragment를 추가/삭제/재배치 하는 클래스의 참조변수
     private DatabaseReference mDatabase;
+    FragmentTransaction transaction;
+    JundangFormFragment fragment;
     // [END define_database_reference]
 
     private FirebaseRecyclerAdapter<JungPost, JungPostViewHolder> mAdapter;
@@ -57,6 +61,9 @@ public class MyJungdangFragment extends Fragment {
         // Inflate the layout for this fragment
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_myjundangs, container, false);
+
+       // View view = inflater.inflate(R.layout.fragment_myjundangs, container, false);
+
         manager = (FragmentManager) getFragmentManager();
         // [START create_database_reference]
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -75,13 +82,25 @@ public class MyJungdangFragment extends Fragment {
             public void onClick(View v) {
                 tran = manager.beginTransaction();
                 Fragment frag = new MyJungdangFragment_SearchJungdang();
-                tran.replace(R.id.my_jungdang_layout, frag);
+                tran.replace(R.id.fragment_myjundang, frag);
                 tran.addToBackStack(null);
                 tran.commit();
             }
         });
         Log.d("2-6","tq");
 
+       /* fragment=new JundangFormFragment();
+        makingJundang=(Button)rootView.findViewById(R.id.makingJundang);
+        makingJundang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transaction.replace(R.id.fragment_myjundang,fragment);
+                transaction.commit();
+            }
+        });*/
+
+
+        //return rootView;
         return rootView;
 
     }
