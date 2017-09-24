@@ -24,7 +24,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/category"
-            android:text="자유"
             android:textSize="20dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"

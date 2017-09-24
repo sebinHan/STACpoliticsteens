@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import droidmentor.PoliticTeens_Client.models.Comment;
+import droidmentor.PoliticTeens_Client.models.JungPost;
 import droidmentor.PoliticTeens_Client.models.Post;
 import droidmentor.PoliticTeens_Client.models.UserLogin;
 
@@ -42,6 +43,7 @@ public class JungPostDetailActivity extends BaseActivity2 implements View.OnClic
 
     private TextView mAuthorView;
     private TextView mTitleView;
+    private TextView mCategoryView;
     private TextView mBodyView;
     private EditText mCommentField;
     private Button mCommentButton;
@@ -67,6 +69,7 @@ public class JungPostDetailActivity extends BaseActivity2 implements View.OnClic
         mAuthorView = (TextView) findViewById(R.id.post_author);
         mTitleView = (TextView) findViewById(R.id.post_title);
         mBodyView = (TextView) findViewById(R.id.post_body);
+        mCategoryView = (TextView) findViewById(R.id.category);
         mCommentField = (EditText) findViewById(R.id.field_comment_text);
         mCommentButton = (Button) findViewById(R.id.button_post_comment);
         mCommentsRecycler = (RecyclerView) findViewById(R.id.recycler_comments);
@@ -86,7 +89,7 @@ public class JungPostDetailActivity extends BaseActivity2 implements View.OnClic
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
-                Post post = dataSnapshot.getValue(Post.class);
+                JungPost post = dataSnapshot.getValue(JungPost.class);
                 // [START_EXCLUDE]
                 mAuthorView.setText(post.author);
                 mTitleView.setText(post.title);

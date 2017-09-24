@@ -101,25 +101,46 @@ public class MyJungdangFragment extends Fragment {
         // Set up FirebaseRecyclerAdapter with the Query
         Query postsQuery = getQuery(mDatabase);
         Log.d("222","tq");
+
         mAdapter = new FirebaseRecyclerAdapter<JungPost, JungPostViewHolder>(JungPost.class, R.layout.myjungdang_item_post,
                 JungPostViewHolder.class, postsQuery) {
-
             @Override
             protected void populateViewHolder(final JungPostViewHolder viewHolder, final JungPost model, final int position) {
                 final DatabaseReference postRef = getRef(position);
-
                 // Set click listener for the whole post view
                 final String postKey = postRef.getKey();
+
+                Log.d("222","tqtqtqtqㅅㅂtq32332");
+                viewHolder.bindToPost(model, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View starView) {
+                        // Need to write to both places the post is stored
+                        DatabaseReference globalPostRef = mDatabase.child("jung_posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("jung_user-posts").child(model.uid).child(postRef.getKey());
+                        // Run two transactions
+                        onStarClicked(globalPostRef);
+                        onStarClicked(userPostRef);
+                    }
+                });
+                Log.d("222","tqtqtqtqㅅㅂtq3233322");
+            }
+             /*
+            @Override
+            protected void populateViewHolder(final JungPostViewHolder viewHolder, final JungPost model, final int position) {
+               final DatabaseReference postRef = getRef(position);
+                // Set click listener for the whole post view
+                final String postKey = postRef.getKey();
+
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         // Launch PostDetailActivity
                         Intent intent = new Intent(getActivity(), JungPostDetailActivity.class);
                         intent.putExtra(JungPostDetailActivity.EXTRA_POST_KEY, postKey);
                         startActivity(intent);
                     }
                 });
-
                 // Determine if the current user has liked this post and set UI accordingly
                 if (model.stars.containsKey(getUid())) {
                     viewHolder.starView.setImageResource(R.drawable.bbb);
@@ -134,13 +155,13 @@ public class MyJungdangFragment extends Fragment {
                         // Need to write to both places the post is stored
                         DatabaseReference globalPostRef = mDatabase.child("jung_posts").child(postRef.getKey());
                         DatabaseReference userPostRef = mDatabase.child("jung_user-posts").child(model.uid).child(postRef.getKey());
-
                         // Run two transactions
                         onStarClicked(globalPostRef);
                         onStarClicked(userPostRef);
                     }
                 });
-            }
+            }*/
+
         };
         Log.d("2-2","tq");
         mRecycler.setAdapter(mAdapter);
@@ -207,5 +228,6 @@ public class MyJungdangFragment extends Fragment {
 
         return recentPostsQuery;
     }
+
 
 }
